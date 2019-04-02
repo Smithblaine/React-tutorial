@@ -1,5 +1,5 @@
 const path = require('path');
-const HtmlWebpackPlugiin = require("html-webpack-plugin");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
     entry: './src/index.js',
@@ -7,15 +7,20 @@ module.exports = {
         path: path.join(__dirname, '/dist'),
         filename: 'index_bundle.js'
     },
-    module:{
+    module: {
        rules: [
-           {
-               test: /\.js$/,
-               eclude: /node_modules/,
-               use:{
-                   loader: 'babel-loader'
-               }
-           }
+            {
+                test: /\.js$/,
+                exclude: /node_modules/,
+                use: {
+                    loader: 'babel-loader'
+                }
+            }
        ]
-    }
+    },
+    plugins: [
+        new HtmlWebpackPlugin ({
+            template: './src/index.html'
+        })
+    ]
 }
